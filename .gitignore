@@ -1,0 +1,4 @@
+orchestrator/node_modules
+services/users/node_modules
+orchestrator/.env
+services/users/.env
