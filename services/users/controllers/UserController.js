@@ -3,7 +3,9 @@
   findUserById,
   createUser,
   updateUserById,
-  deleteUserById
+  deleteUserById,
+  findUserByAccountNumber,
+  findUserByIdentityNumber
 } = require('../models/User')
 
 class UserController {
@@ -85,6 +87,36 @@ class UserController {
         next({ message: 'DataNotFound' })
       }
     } catch (error) {
+      next(error)
+    }
+  }
+
+  static async getUserByAccountNumber (req, res, next) {
+    const { accountNumber } = req.params
+    try {
+      const data = await findUserByAccountNumber(accountNumber)
+      if (data) {
+        res.status(200).json(data)
+      } else {
+        next({ message: 'DataNotFound' })
+      }
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
+  }
+
+  static async getUserByIdentityNumber (req, res, next) {
+    const { identityNumber } = req.params
+    try {
+      const data = await findUserByIdentityNumber(identityNumber)
+      if (data) {
+        res.status(200).json(data)
+      } else {
+        next({ message: 'DataNotFound' })
+      }
+    } catch (error) {
+      console.log(error)
       next(error)
     }
   }

@@ -38,6 +38,20 @@ class User {
       _id: ObjectId(userId)
     })
   }
+
+  static findUserByAccountNumber = (accountNumber) => {
+    const seriesInstance = getDatabase().collection(collection)
+    return seriesInstance.findOne({
+      accountNumber: +accountNumber
+    })
+  }
+
+  static findUserByIdentityNumber = (identityNumber) => {
+    const seriesInstance = getDatabase().collection(collection)
+    return seriesInstance.findOne({
+      identityNumber: +identityNumber
+    })
+  }
 }
 
 module.exports = User
