@@ -43,6 +43,42 @@ class UserController {
       next(error.response)
     }
   }
+
+  static async getUserByAccountNumber (req, res, next) {
+    const { access_token } = req.headers
+    const { accountNumber } = req.params
+    try {
+      if (!access_token) next({ message: 'Forbidden' })
+      const { data: users } = await userService({
+        method: 'GET',
+        url: `/users/accounts/${accountNumber}`,
+        headers: {
+          access_token
+        }
+      })
+      res.status(200).json(users)
+    } catch (error) {
+      next(error.response)
+    }
+  }
+
+  static async getUserByIdentityNumber (req, res, next) {
+    const { access_token } = req.headers
+    const { identityNumber } = req.params
+    try {
+      if (!access_token) next({ message: 'Forbidden' })
+      const { data: users } = await userService({
+        method: 'GET',
+        url: `/users/identities/${identityNumber}`,
+        headers: {
+          access_token
+        }
+      })
+      res.status(200).json(users)
+    } catch (error) {
+      next(error.response)
+    }
+  }
 }
 
 module.exports = UserController
