@@ -5,7 +5,7 @@ let database = null
 const connect = async () => {
   try {
     // const uri = 'mongodb://localhost:27017'
-    const uri = 'mongodb+srv://ibnutriyuono:bakmandi@cluster0.ozn2h.mongodb.net/ibnutriyuono?retryWrites=true&w=majority'
+    const uri = process.env.MONGODB_URI
     const client = new MongoClient(uri, { useUnifiedTopology: true })
     await client.connect()
     const db = client.db('hacktiv-entertainme')
