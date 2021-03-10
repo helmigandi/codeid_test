@@ -11,6 +11,16 @@ const errorHandler = (err, req, res, next) => {
         message: "Sorry. The user id is invalid."
       })
       break;
+    case "Forbidden":
+      res.status(403).json({
+        message: "Forbidden."
+      })
+      break;
+    case "InvalidToken":
+      res.status(403).json({
+        message: "Forbidden. Invalid Token"
+      })
+      break;
     default:
       console.log(err)
       res.status(500).json({
