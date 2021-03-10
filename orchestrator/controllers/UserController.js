@@ -25,6 +25,24 @@ class UserController {
       next(error.response)
     }
   }
+
+  static async getUserById (req, res, next) {
+    const { access_token } = req.headers
+    const { userId } = req.params
+    try {
+      if (!access_token) next({ message: 'Forbidden' })
+      const { data: users } = await userService({
+        method: 'GET',
+        url: `/users/${userId}`,
+        headers: {
+          access_token
+        }
+      })
+      res.status(200).json(users)
+    } catch (error) {
+      next(error.response)
+    }
+  }
 }
 
 module.exports = UserController
