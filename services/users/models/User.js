@@ -17,6 +17,10 @@ class User {
 
   static createUser = (data) => {
     const seriesInstance = getDatabase().collection(collection)
+    seriesInstance.createIndexes({ identityNumber: 1 }, { unique: true })
+    seriesInstance.createIndexes({ accountNumber: 1 }, { unique: true })
+    seriesInstance.createIndexes({ userName: 1 }, { unique: true })
+    seriesInstance.createIndexes({ emailAddress: 1 }, { unique: true })
     return seriesInstance.insertOne(data)
   }
 
